@@ -42,7 +42,7 @@ pub use self::fun::*;
 
 // https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#place
 ///Represents a named location.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Place {
     ///Alphanumeric ID of the location.
     pub id: String,
