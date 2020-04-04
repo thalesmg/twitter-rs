@@ -62,7 +62,7 @@ use std::vec::IntoIter as VecIter;
 
 use chrono;
 use futures::Stream;
-use serde::{Deserialize, Deserializer};
+use serde::{Deserialize, Deserializer, Serialize};
 
 use crate::common::*;
 use crate::{auth, entities, error, links, tweet};
@@ -160,7 +160,7 @@ impl From<String> for UserID {
 /// * `show_all_inline_media`
 /// * `time_zone`/`utc_offset`
 /// * `withheld_in_countries`/`withheld_scope`
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize)]
 pub struct TwitterUser {
     /// Indicates this user has an account with "contributor mode" enabled, allowing
     /// for Tweets issued by the user to be co-authored by another account. Rarely `true`.
@@ -361,7 +361,7 @@ impl<'de> Deserialize<'de> for TwitterUser {
 }
 
 /// Container for URL entity information that may be paired with a user's profile.
-#[derive(Debug, Clone, Default, Deserialize)]
+#[derive(Debug, Clone, Default, Deserialize, Serialize)]
 pub struct UserEntities {
     /// URL information that has been parsed out of the user's `description`. If no URLs were
     /// detected, then the contained Vec will be empty.
@@ -375,7 +375,7 @@ pub struct UserEntities {
 }
 
 /// Represents a collection of URL entity information paired with a specific user profile field.
-#[derive(Debug, Clone, Default, Deserialize)]
+#[derive(Debug, Clone, Default, Deserialize, Serialize)]
 pub struct UserEntityDetail {
     /// Collection of URL entity information.
     ///
